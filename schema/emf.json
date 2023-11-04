@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "AWS CloudWatch Embedded Metrics Format (EMF) Schema",
-  "additionalProperties": false,
   "required": [
     "_aws"
   ],
@@ -109,6 +108,10 @@
                       "$id": "#/properties/_aws/properties/CloudWatchMetrics/items/properties/Metrics/items/properties/StorageResolution",
                       "type": "integer",
                       "title": "StorageResolution",
+                      "enum": [
+                        1,
+                        60
+                      ],
                       "examples": [
                         60
                       ]
