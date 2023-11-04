@@ -1,4 +1,5 @@
-package emf
+// Package unit provides valid AWS CloudWatch EMF metric units.
+package unit
 
 // Unit represents an EMF metric unit.
 type Unit string
