@@ -1,4 +1,9 @@
-// Package emf is a placeholder for something cool.
+// Package emf provides a simple, idiomatic API for Go Lambda Functions to record custom metrics in the CloudWatch
+// Embedded Metrics Format (EMF).
+//
+// It is fully compliant with the [EMF Specification]
+//
+// [EMF Specification]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format_Specification.html
 package emf
 
 import (
