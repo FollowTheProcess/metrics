@@ -28,7 +28,6 @@ linters:
     - reassign
     - revive
     - staticcheck
-    - tagliatelle
     - tenv
     - testpackage
     - thelper

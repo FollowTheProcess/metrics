@@ -1,0 +1,20 @@
+{
+  "Timestamp": 1574109732004,
+  "CloudWatchMetrics": [
+    {
+      "Namespace": "lambda-function-metrics",
+      "Dimensions": [
+        [
+          "functionVersion"
+        ]
+      ],
+      "Metrics": [
+        {
+          "Name": "time",
+          "Unit": "Milliseconds",
+          "StorageResolution": 60
+        }
+      ]
+    }
+  ]
+}

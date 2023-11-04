@@ -1,0 +1,6 @@
+github.com/FollowTheProcess/test v0.6.0 h1:L2UmQxCLOh/UyEyqqTT8JgXlBu9VTA4ick0WW2Hmk+0=
+github.com/FollowTheProcess/test v0.6.0/go.mod h1:9oxZcKkTAgz3bZMiHPtYCytdPcvICS+AAp5mzZzB2oA=
+github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
+github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+github.com/kinbiko/jsonassert v1.1.1 h1:DB12divY+YB+cVpHULLuKePSi6+ui4M/shHSzJISkSE=
+github.com/kinbiko/jsonassert v1.1.1/go.mod h1:NO4lzrogohtIdNUNzx8sdzB55M4R4Q1bsrWVdqQ7C+A=
