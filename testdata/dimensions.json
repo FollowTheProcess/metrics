@@ -8,6 +8,9 @@
           [
             "ServiceName",
             "ServiceType"
+          ],
+          [
+            "TestDimension"
           ]
         ],
         "Metrics": [
@@ -25,7 +28,8 @@
   "functionVersion": "",
   "logStreamId": "",
   "memorySize": "",
-  "something": 5,
+  "something": 7,
   "ServiceName": "",
-  "ServiceType": "AWS::Lambda::Function"
+  "ServiceType": "AWS::Lambda::Function",
+  "TestDimension": "value"
 }

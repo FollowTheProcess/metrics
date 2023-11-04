@@ -1,10 +1,10 @@
-// Package emf provides a simple, idiomatic API for Go Lambda Functions to record custom metrics in the CloudWatch
+// Package metrics provides a simple, idiomatic API for Go Lambda Functions to record custom metrics in the CloudWatch
 // Embedded Metrics Format (EMF).
 //
 // It is fully compliant with the [EMF Specification]
 //
 // [EMF Specification]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format_Specification.html
-package emf
+package metrics
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/FollowTheProcess/emf/unit"
+	"github.com/FollowTheProcess/metrics/unit"
 )
 
 // StorageResolution represents the metrics resolution.
@@ -102,7 +102,7 @@ func LogGroupName(name string) Option {
 }
 
 // New returns an EMF Metrics logger suitable for use in Lambda functions.
-func New(opts ...Option) Logger {
+func New(opts ...Option) *Logger {
 	logger := Logger{
 		// Default to os.Stdout
 		stdout:  os.Stdout,
@@ -137,7 +137,7 @@ func New(opts ...Option) Logger {
 	logger.metrics.Dimensions = dimensions
 	logger.metrics.Namespace = "aws-embedded-metrics"
 
-	return logger
+	return &logger
 }
 
 // Count records a count metric.
@@ -146,15 +146,22 @@ func (l *Logger) Count(name string, count int) *Logger {
 	return l
 }
 
+// Dimension adds a metrics dimension.
+func (l *Logger) Dimension(key, value string) *Logger {
+	l.metrics.Dimensions = append(l.metrics.Dimensions, Dimension{key})
+	l.values[key] = value
+	return l
+}
+
 // Flush outputs the collected metrics to stdout so they can be discovered by CloudWatch.
 //
 // Typical usage in a lambda handler would be to populate metrics throughout and then
 // defer a call to Flush before returning to the main entry point.
 //
-//	metrics := emf.New()
-//	metrics.Count("something", 5) // Something happened 5 times, very important business metric!
+//	m := metrics.New()
+//	m.Count("something", 5) // Something happened 5 times, very important business metric!
 //	... // More logic
-//	defer metric.Flush()
+//	defer m.Flush()
 func (l *Logger) Flush() error {
 	if len(l.metrics.Metrics) == 0 {
 		// Bail early if we have nothing to do

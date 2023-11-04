@@ -1,4 +1,4 @@
-module github.com/FollowTheProcess/emf
+module github.com/FollowTheProcess/metrics
 
 go 1.21
 
