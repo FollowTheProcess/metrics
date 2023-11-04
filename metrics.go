@@ -141,8 +141,8 @@ func New(opts ...Option) *Logger {
 }
 
 // Count records a count metric.
-func (l *Logger) Count(name string, count int) *Logger {
-	l.put(name, count, unit.Count, StandardResolution)
+func (l *Logger) Count(name string, count int, resolution StorageResolution) *Logger {
+	l.store(name, count, unit.Count, resolution)
 	return l
 }
 
@@ -161,7 +161,7 @@ func (l *Logger) Dimension(key, value string) *Logger {
 //	m := metrics.New()
 //	m.Count("something", 5) // Something happened 5 times, very important business metric!
 //	... // More logic
-//	defer m.Flush()
+//	defer m.Flush() // Although you should handle the error Flush returns
 func (l *Logger) Flush() error {
 	if len(l.metrics.Metrics) == 0 {
 		// Bail early if we have nothing to do
@@ -180,8 +180,8 @@ func (l *Logger) Flush() error {
 	return nil
 }
 
-// put inserts a metric into the Logger, to be flushed later.
-func (l *Logger) put(name string, value any, unit unit.Unit, resolution StorageResolution) {
+// store inserts a metric into the Logger, to be flushed later.
+func (l *Logger) store(name string, value any, unit unit.Unit, resolution StorageResolution) {
 	// Store the metric metadata
 	metric := MetricDefinition{
 		Name:       name,
@@ -190,6 +190,6 @@ func (l *Logger) put(name string, value any, unit unit.Unit, resolution StorageR
 	}
 	l.metrics.Metrics = append(l.metrics.Metrics, metric)
 
-	// Add the metric values to the root node
+	// Add the metric values to the root
 	l.values[name] = value
 }

@@ -23,14 +23,21 @@ func TestMetricsLog(t *testing.T) {
 		{
 			name: "count",
 			logFn: func(logger *metrics.Logger) {
-				logger.Count("something", 5)
+				logger.Count("something", 5, metrics.StandardResolution)
 			},
 			want: "count.json",
 		},
 		{
+			name: "count high resolution",
+			logFn: func(logger *metrics.Logger) {
+				logger.Count("something", 27, metrics.HighResolution)
+			},
+			want: "count-high-res.json",
+		},
+		{
 			name: "dimension and a count",
 			logFn: func(logger *metrics.Logger) {
-				logger.Dimension("TestDimension", "value").Count("something", 7)
+				logger.Dimension("TestDimension", "value").Count("something", 7, metrics.StandardResolution)
 			},
 			want: "dimensions.json",
 		},
