@@ -1,12 +1,14 @@
 package emf_test
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/FollowTheProcess/emf"
+	"github.com/FollowTheProcess/emf/unit"
 	"github.com/FollowTheProcess/test"
 	"github.com/kinbiko/jsonassert"
 )
@@ -22,7 +24,7 @@ func TestMetricsJSON(t *testing.T) {
 		{
 			name: "valid spec test case",
 			metrics: emf.Metadata{
-				Metrics: []emf.Metric{
+				Metrics: []emf.MetricDirective{
 					{
 						Namespace: "lambda-function-metrics",
 						Dimensions: []emf.Dimension{
@@ -31,7 +33,7 @@ func TestMetricsJSON(t *testing.T) {
 						Metrics: []emf.MetricDefinition{
 							{
 								Name:       "time",
-								Unit:       emf.Milliseconds,
+								Unit:       unit.Milliseconds,
 								Resolution: emf.StandardResolution,
 							},
 						},
@@ -56,4 +58,19 @@ func TestMetricsJSON(t *testing.T) {
 			ja.Assertf(string(got), string(want))
 		})
 	}
+}
+
+func TestCount(t *testing.T) {
+	buf := &bytes.Buffer{}
+	metrics := emf.New(emf.Stdout(buf), emf.LogGroupName("test"))
+
+	metrics.Count("something", 5)
+	test.Ok(t, metrics.Log(), "metrics.Log() returned an error")
+
+	count := filepath.Join(test.Data(t), "count.json")
+	want, err := os.ReadFile(count)
+	test.Ok(t, err, "read count.json")
+
+	ja := jsonassert.New(t)
+	ja.Assertf(buf.String(), string(want))
 }
