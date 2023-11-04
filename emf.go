@@ -146,15 +146,23 @@ func (l *Logger) Count(name string, count int) *Logger {
 	return l
 }
 
-// Log outputs the current state of the metrics Logger in EMF JSON.
-func (l *Logger) Log() error {
+// Flush outputs the collected metrics to stdout so they can be discovered by CloudWatch.
+//
+// Typical usage in a lambda handler would be to populate metrics throughout and then
+// defer a call to Flush before returning to the main entry point.
+//
+//	metrics := emf.New()
+//	metrics.Count("something", 5) // Something happened 5 times, very important business metric!
+//	... // More logic
+//	defer metric.Flush()
+func (l *Logger) Flush() error {
 	if len(l.metrics.Metrics) == 0 {
 		// Bail early if we have nothing to do
 		return nil
 	}
 
 	l.values["_aws"] = Metadata{
-		Timestamp:    time.Now().UnixMilli(),
+		Timestamp:    time.Now().UTC().UnixMilli(),
 		Metrics:      []MetricDirective{l.metrics},
 		LogGroupName: l.logGroupName,
 	}
