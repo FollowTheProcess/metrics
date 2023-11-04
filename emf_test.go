@@ -65,7 +65,7 @@ func TestCount(t *testing.T) {
 	metrics := emf.New(emf.Stdout(buf), emf.LogGroupName("test"))
 
 	metrics.Count("something", 5)
-	test.Ok(t, metrics.Log(), "metrics.Log() returned an error")
+	test.Ok(t, metrics.Flush(), "metrics.Log() returned an error")
 
 	count := filepath.Join(test.Data(t), "count.json")
 	want, err := os.ReadFile(count)
