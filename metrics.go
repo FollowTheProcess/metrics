@@ -205,6 +205,8 @@ func (l *Logger) Namespace(namespace string) *Logger {
 //	... // More logic
 //	defer m.Flush() // Although you should handle the error Flush returns
 func (l *Logger) Flush() error {
+	l.mu.Lock()
+	defer l.mu.Unlock()
 	if len(l.metrics.Metrics) == 0 {
 		// Bail early if we have nothing to do
 		return nil
