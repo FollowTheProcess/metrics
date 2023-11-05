@@ -171,6 +171,14 @@ func (l *Logger) Dimension(key, value string) *Logger {
 	return l
 }
 
+// Namespace sets the namespace for the Logger.
+func (l *Logger) Namespace(namespace string) *Logger {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.metrics.Namespace = namespace
+	return l
+}
+
 // Flush outputs the collected metrics to stdout so they can be discovered by CloudWatch.
 //
 // Typical usage in a lambda handler would be to populate metrics throughout and then
