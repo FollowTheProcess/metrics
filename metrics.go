@@ -12,6 +12,7 @@ import (
 	"io"
 	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/FollowTheProcess/metrics/unit"
@@ -65,6 +66,8 @@ type MetricDefinition struct {
 }
 
 // Logger is the mechanism to write EMF metrics.
+//
+// A Logger is safe to use concurrently across goroutines.
 type Logger struct {
 	// Where to write EMF metrics to.
 	stdout io.Writer
@@ -81,6 +84,9 @@ type Logger struct {
 
 	// The actual metrics.
 	metrics MetricDirective
+
+	// Synchronisation
+	mu sync.Mutex
 }
 
 // Option is a functional option to configure a Logger.
@@ -141,13 +147,25 @@ func New(opts ...Option) *Logger {
 }
 
 // Count records a count metric.
-func (l *Logger) Count(name string, count int, resolution StorageResolution) *Logger {
-	l.store(name, count, unit.Count, resolution)
+func (l *Logger) Count(name string, count int, res StorageResolution) *Logger {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.store(name, count, unit.Count, res)
+	return l
+}
+
+// Add records a generic user defined metric.
+func (l *Logger) Add(name string, value any, unit unit.Unit, res StorageResolution) *Logger {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.store(name, value, unit, res)
 	return l
 }
 
 // Dimension adds a metrics dimension.
 func (l *Logger) Dimension(key, value string) *Logger {
+	l.mu.Lock()
+	defer l.mu.Unlock()
 	l.metrics.Dimensions = append(l.metrics.Dimensions, Dimension{key})
 	l.values[key] = value
 	return l
@@ -181,12 +199,12 @@ func (l *Logger) Flush() error {
 }
 
 // store inserts a metric into the Logger, to be flushed later.
-func (l *Logger) store(name string, value any, unit unit.Unit, resolution StorageResolution) {
+func (l *Logger) store(name string, value any, unit unit.Unit, res StorageResolution) {
 	// Store the metric metadata
 	metric := MetricDefinition{
 		Name:       name,
 		Unit:       unit,
-		Resolution: resolution,
+		Resolution: res,
 	}
 	l.metrics.Metrics = append(l.metrics.Metrics, metric)
 

@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/FollowTheProcess/metrics"
+	"github.com/FollowTheProcess/metrics/unit"
 	"github.com/FollowTheProcess/test"
 	"github.com/kinbiko/jsonassert"
 )
@@ -21,11 +22,24 @@ func TestMetricsLog(t *testing.T) {
 		want  string                // Name of file containing expected JSON
 	}{
 		{
+			name:  "no metrics means empty json",
+			logFn: func(logger *metrics.Logger) {},
+			want:  "empty.json",
+		},
+		{
 			name: "count",
 			logFn: func(logger *metrics.Logger) {
 				logger.Count("something", 5, metrics.StandardResolution)
 			},
 			want: "count.json",
+		},
+		{
+			name: "count with trace id",
+			env:  map[string]string{"_X_AMZN_TRACE_ID": "something_looks_like_id_with_Sampled=1"},
+			logFn: func(logger *metrics.Logger) {
+				logger.Count("something", 5, metrics.StandardResolution)
+			},
+			want: "traceid.json",
 		},
 		{
 			name: "count high resolution",
@@ -40,6 +54,13 @@ func TestMetricsLog(t *testing.T) {
 				logger.Dimension("TestDimension", "value").Count("something", 7, metrics.StandardResolution)
 			},
 			want: "dimensions.json",
+		},
+		{
+			name: "generic metric",
+			logFn: func(logger *metrics.Logger) {
+				logger.Add("Foo", 27, unit.Percent, metrics.StandardResolution)
+			},
+			want: "generic.json",
 		},
 	}
 
