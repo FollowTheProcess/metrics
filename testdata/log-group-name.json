@@ -1,0 +1,32 @@
+{
+  "_aws": {
+    "Timestamp": "<<PRESENCE>>",
+    "LogGroupName": "MyLogGroup",
+    "CloudWatchMetrics": [
+      {
+        "Namespace": "MyNameSpace",
+        "Dimensions": [
+          [
+            "ServiceName",
+            "ServiceType"
+          ]
+        ],
+        "Metrics": [
+          {
+            "Name": "Foo",
+            "Unit": "Percent",
+            "StorageResolution": 60
+          }
+        ]
+      }
+    ]
+  },
+  "executionEnvironment": "",
+  "functionName": "",
+  "functionVersion": "",
+  "logStreamId": "",
+  "memorySize": "",
+  "ServiceName": "",
+  "ServiceType": "AWS::Lambda::Function",
+  "Foo": 27
+}

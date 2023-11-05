@@ -76,6 +76,22 @@ func TestMetricsLog(t *testing.T) {
 			},
 			want: "env.json",
 		},
+		{
+			name: "namespace",
+			logFn: func(logger *metrics.Logger) {
+				logger.Namespace("MyNameSpace").Add("Foo", 27, unit.Percent, metrics.StandardResolution)
+			},
+			want: "namespace.json",
+		},
+		{
+			name: "log group name",
+			logFn: func(logger *metrics.Logger) {
+				logger.Namespace("MyNameSpace").Add("Foo", 27, unit.Percent, metrics.StandardResolution)
+				fn := metrics.LogGroupName("MyLogGroup")
+				fn(logger)
+			},
+			want: "log-group-name.json",
+		},
 	}
 
 	for _, tt := range tests {
