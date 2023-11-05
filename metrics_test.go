@@ -62,6 +62,20 @@ func TestMetricsLog(t *testing.T) {
 			},
 			want: "generic.json",
 		},
+		{
+			name: "all the lambda env vars",
+			env: map[string]string{
+				"AWS_LAMBDA_FUNCTION_NAME":        "FuncyFunc",
+				"AWS_EXECUTION_ENV":               "Go1.21",
+				"AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "256",
+				"AWS_LAMBDA_FUNCTION_VERSION":     "12",
+				"AWS_LAMBDA_LOG_STREAM_NAME":      "LoggyLog",
+			},
+			logFn: func(logger *metrics.Logger) {
+				logger.Add("Bar", 267, unit.BytesPerSecond, metrics.HighResolution)
+			},
+			want: "env.json",
+		},
 	}
 
 	for _, tt := range tests {
