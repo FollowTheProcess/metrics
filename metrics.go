@@ -23,7 +23,7 @@ type StorageResolution int
 
 const (
 	HighResolution     StorageResolution = 1  // 1 second resolution, for high precision metrics
-	StandardResolution StorageResolution = 60 // Minute resolution, suitable for most metrics
+	StandardResolution StorageResolution = 60 // 1 minute resolution, suitable for most metrics
 )
 
 // Metadata encodes the EMF Metadata object.
@@ -95,6 +95,8 @@ type Option func(logger *Logger)
 // Stdout sets the output for a Logger.
 func Stdout(stdout io.Writer) Option {
 	return func(logger *Logger) {
+		logger.mu.Lock()
+		defer logger.mu.Unlock()
 		logger.stdout = stdout
 		logger.encoder = json.NewEncoder(stdout)
 	}
@@ -103,6 +105,8 @@ func Stdout(stdout io.Writer) Option {
 // LogGroupName sets the CloudWatch log group name for a Logger.
 func LogGroupName(name string) Option {
 	return func(logger *Logger) {
+		logger.mu.Lock()
+		defer logger.mu.Unlock()
 		logger.logGroupName = name
 	}
 }
@@ -146,7 +150,10 @@ func New(opts ...Option) *Logger {
 	return &logger
 }
 
-// Count records a count metric.
+// Count records a simple count metric.
+//
+//	m := metrics.New()
+//	m.Count("UserLogIn", 1, metrics.StandardResolution)
 func (l *Logger) Count(name string, count int, res StorageResolution) *Logger {
 	l.mu.Lock()
 	defer l.mu.Unlock()
@@ -155,6 +162,9 @@ func (l *Logger) Count(name string, count int, res StorageResolution) *Logger {
 }
 
 // Add records a generic user defined metric.
+//
+//	m := metrics.New()
+//	m.Add("FileSize", 256, unit.Megabytes, metrics.StandardResolution)
 func (l *Logger) Add(name string, value any, unit unit.Unit, res StorageResolution) *Logger {
 	l.mu.Lock()
 	defer l.mu.Unlock()
@@ -163,6 +173,9 @@ func (l *Logger) Add(name string, value any, unit unit.Unit, res StorageResoluti
 }
 
 // Dimension adds a metrics dimension.
+//
+//	m := metrics.New()
+//	m.Dimension("MyDimension", "Yes")
 func (l *Logger) Dimension(key, value string) *Logger {
 	l.mu.Lock()
 	defer l.mu.Unlock()
@@ -172,6 +185,9 @@ func (l *Logger) Dimension(key, value string) *Logger {
 }
 
 // Namespace sets the namespace for the Logger.
+//
+//	m := metrics.New()
+//	m.Namespace("MyCustomNamespace")
 func (l *Logger) Namespace(namespace string) *Logger {
 	l.mu.Lock()
 	defer l.mu.Unlock()
