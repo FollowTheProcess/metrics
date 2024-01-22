@@ -3,7 +3,7 @@ module github.com/FollowTheProcess/metrics
 go 1.21
 
 require (
-	github.com/FollowTheProcess/test v0.7.0
+	github.com/FollowTheProcess/test v0.9.0
 	github.com/kinbiko/jsonassert v1.1.1
 )
 
