@@ -29,25 +29,25 @@ const (
 // Metadata encodes the EMF Metadata object.
 type Metadata struct {
 	// Optional name of the CloudWatch log group.
-	LogGroupName string `json:"LogGroupName,omitempty"`
+	LogGroupName string `json:"LogGroupName,omitempty"` //nolint: tagliatelle // AWS uses pascal case
 
 	// List of metric directives.
-	Metrics []MetricDirective `json:"CloudWatchMetrics"`
+	Metrics []MetricDirective `json:"CloudWatchMetrics"` //nolint: tagliatelle // AWS uses pascal case
 
 	// UNIX (milliseconds) timestamp for the metric.
-	Timestamp int64 `json:"Timestamp"`
+	Timestamp int64 `json:"Timestamp"` //nolint: tagliatelle // AWS uses pascal case
 }
 
 // MetricDirective encodes the EMF MetricDirective object.
 type MetricDirective struct {
 	// The CloudWatch namespace for the metric.
-	Namespace string `json:"Namespace"`
+	Namespace string `json:"Namespace"` //nolint: tagliatelle // AWS uses pascal case
 
 	// List of EMF dimension keys.
-	Dimensions []Dimension `json:"Dimensions"`
+	Dimensions []Dimension `json:"Dimensions"` //nolint: tagliatelle // AWS uses pascal case
 
 	// The actual metric definitions.
-	Metrics []MetricDefinition `json:"Metrics"`
+	Metrics []MetricDefinition `json:"Metrics"` //nolint: tagliatelle // AWS uses pascal case
 }
 
 // Dimension encodes a single EMF metric dimension.
@@ -56,13 +56,13 @@ type Dimension []string
 // MetricDefinition encodes a single EMF metric definition.
 type MetricDefinition struct {
 	// The name of the metric
-	Name string `json:"Name"`
+	Name string `json:"Name"` //nolint: tagliatelle // AWS uses pascal case
 
 	// The unit of measurement, optional. If omitted, None is assumed
-	Unit unit.Unit `json:"Unit,omitempty"`
+	Unit unit.Unit `json:"Unit,omitempty"` //nolint: tagliatelle // AWS uses pascal case
 
 	// Resolution for the metric, optional. If omitted, standard resolution is assumed.
-	Resolution StorageResolution `json:"StorageResolution,omitempty"`
+	Resolution StorageResolution `json:"StorageResolution,omitempty"` //nolint: tagliatelle // AWS uses pascal case
 }
 
 // Logger is the mechanism to write EMF metrics.
