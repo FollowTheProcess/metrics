@@ -1,9 +1,10 @@
 module github.com/FollowTheProcess/metrics
 
 go 1.21
+toolchain go1.22.5
 
 require (
-	github.com/FollowTheProcess/test v0.9.0
+	github.com/FollowTheProcess/test v0.10.1
 	github.com/kinbiko/jsonassert v1.1.1
 )
 
