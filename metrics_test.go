@@ -107,10 +107,10 @@ func TestMetricsLog(t *testing.T) {
 			logger := metrics.New(metrics.Stdout(buf))
 			tt.logFn(logger)
 
-			test.Ok(t, logger.Flush(), "logger.Flush() returned an error")
+			test.Ok(t, logger.Flush())
 
 			want, err := os.ReadFile(filepath.Join(testdata, tt.want))
-			test.Ok(t, err, "read tt.want")
+			test.Ok(t, err)
 
 			ja := jsonassert.New(t)
 			ja.Assertf(buf.String(), string(want))
