@@ -5,7 +5,7 @@ go 1.22
 toolchain go1.22.5
 
 require (
-	github.com/FollowTheProcess/test v0.12.1
+	github.com/FollowTheProcess/test v0.13.0
 	github.com/kinbiko/jsonassert v1.1.1
 )
 
