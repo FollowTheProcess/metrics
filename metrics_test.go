@@ -113,7 +113,7 @@ func TestMetricsLog(t *testing.T) {
 			test.Ok(t, err)
 
 			ja := jsonassert.New(t)
-			ja.Assertf(buf.String(), string(want))
+			ja.Assertf(buf.String(), string(want)) //nolint:govet // non-constant format string
 		})
 	}
 }
