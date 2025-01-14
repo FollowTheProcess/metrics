@@ -1,6 +1,8 @@
 {
+  "Bar": 267,
+  "ServiceName": "FuncyFunc",
+  "ServiceType": "AWS::Lambda::Function",
   "_aws": {
-    "Timestamp": "<<PRESENCE>>",
     "CloudWatchMetrics": [
       {
         "Namespace": "aws-embedded-metrics",
@@ -18,14 +20,12 @@
           }
         ]
       }
-    ]
+    ],
+    "Timestamp": 0
   },
   "executionEnvironment": "Go1.21",
   "functionName": "FuncyFunc",
   "functionVersion": "12",
   "logStreamId": "LoggyLog",
-  "memorySize": "256",
-  "ServiceName": "FuncyFunc",
-  "ServiceType": "AWS::Lambda::Function",
-  "Bar": 267
+  "memorySize": "256"
 }

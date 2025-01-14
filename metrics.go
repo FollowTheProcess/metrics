@@ -29,25 +29,25 @@ const (
 // Metadata encodes the EMF Metadata object.
 type Metadata struct {
 	// Optional name of the CloudWatch log group.
-	LogGroupName string `json:"LogGroupName,omitempty"` //nolint: tagliatelle // AWS uses pascal case
+	LogGroupName string `json:"LogGroupName,omitempty"`
 
 	// List of metric directives.
-	Metrics []MetricDirective `json:"CloudWatchMetrics"` //nolint: tagliatelle // AWS uses pascal case
+	Metrics []MetricDirective `json:"CloudWatchMetrics"`
 
 	// UNIX (milliseconds) timestamp for the metric.
-	Timestamp int64 `json:"Timestamp"` //nolint: tagliatelle // AWS uses pascal case
+	Timestamp int64 `json:"Timestamp"`
 }
 
 // MetricDirective encodes the EMF MetricDirective object.
 type MetricDirective struct {
 	// The CloudWatch namespace for the metric.
-	Namespace string `json:"Namespace"` //nolint: tagliatelle // AWS uses pascal case
+	Namespace string `json:"Namespace"`
 
 	// List of EMF dimension keys.
-	Dimensions []Dimension `json:"Dimensions"` //nolint: tagliatelle // AWS uses pascal case
+	Dimensions []Dimension `json:"Dimensions"`
 
 	// The actual metric definitions.
-	Metrics []MetricDefinition `json:"Metrics"` //nolint: tagliatelle // AWS uses pascal case
+	Metrics []MetricDefinition `json:"Metrics"`
 }
 
 // Dimension encodes a single EMF metric dimension.
@@ -56,13 +56,13 @@ type Dimension []string
 // MetricDefinition encodes a single EMF metric definition.
 type MetricDefinition struct {
 	// The name of the metric
-	Name string `json:"Name"` //nolint: tagliatelle // AWS uses pascal case
+	Name string `json:"Name"`
 
 	// The unit of measurement, optional. If omitted, None is assumed
-	Unit unit.Unit `json:"Unit,omitempty"` //nolint: tagliatelle // AWS uses pascal case
+	Unit unit.Unit `json:"Unit,omitempty"`
 
 	// Resolution for the metric, optional. If omitted, standard resolution is assumed.
-	Resolution StorageResolution `json:"StorageResolution,omitempty"` //nolint: tagliatelle // AWS uses pascal case
+	Resolution StorageResolution `json:"StorageResolution,omitempty"`
 }
 
 // Logger is the mechanism to write EMF metrics.
@@ -99,6 +99,16 @@ func Stdout(stdout io.Writer) Option {
 		defer logger.mu.Unlock()
 		logger.stdout = stdout
 		logger.encoder = json.NewEncoder(stdout)
+	}
+}
+
+// Indent sets JSON indenting for the output, primarily
+// used for testing.
+func Indent(indent bool) Option {
+	return func(logger *Logger) {
+		logger.mu.Lock()
+		defer logger.mu.Unlock()
+		logger.encoder.SetIndent("", "  ")
 	}
 }
 
@@ -212,10 +222,17 @@ func (l *Logger) Flush() error {
 		return nil
 	}
 
-	l.values["_aws"] = Metadata{
-		Timestamp:    time.Now().UTC().UnixMilli(),
-		Metrics:      []MetricDirective{l.metrics},
-		LogGroupName: l.logGroupName,
+	if os.Getenv("METRICS_OMIT_TIMESTAMP") != "" {
+		l.values["_aws"] = Metadata{
+			Metrics:      []MetricDirective{l.metrics},
+			LogGroupName: l.logGroupName,
+		}
+	} else {
+		l.values["_aws"] = Metadata{
+			Timestamp:    time.Now().UTC().UnixMilli(),
+			Metrics:      []MetricDirective{l.metrics},
+			LogGroupName: l.logGroupName,
+		}
 	}
 
 	if err := l.encoder.Encode(l.values); err != nil {

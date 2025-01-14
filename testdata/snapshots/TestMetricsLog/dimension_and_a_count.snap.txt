@@ -1,32 +1,35 @@
 {
+  "ServiceName": "",
+  "ServiceType": "AWS::Lambda::Function",
+  "TestDimension": "value",
   "_aws": {
-    "Timestamp": "<<PRESENCE>>",
-    "LogGroupName": "MyLogGroup",
     "CloudWatchMetrics": [
       {
-        "Namespace": "MyNameSpace",
+        "Namespace": "aws-embedded-metrics",
         "Dimensions": [
           [
             "ServiceName",
             "ServiceType"
+          ],
+          [
+            "TestDimension"
           ]
         ],
         "Metrics": [
           {
-            "Name": "Foo",
-            "Unit": "Percent",
+            "Name": "something",
+            "Unit": "Count",
             "StorageResolution": 60
           }
         ]
       }
-    ]
+    ],
+    "Timestamp": 0
   },
   "executionEnvironment": "",
   "functionName": "",
   "functionVersion": "",
   "logStreamId": "",
   "memorySize": "",
-  "ServiceName": "",
-  "ServiceType": "AWS::Lambda::Function",
-  "Foo": 27
+  "something": 7
 }

@@ -37,6 +37,11 @@ linters:
     - whitespace
 
 linters-settings:
+  tagliatelle:
+    case:
+      rules:
+        json: pascal # AWS uses pascal case
+
   errcheck:
     check-type-assertions: true
     check-blank: true

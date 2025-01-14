@@ -1,9 +1,11 @@
 {
+  "Foo": 27,
+  "ServiceName": "",
+  "ServiceType": "AWS::Lambda::Function",
   "_aws": {
-    "Timestamp": "<<PRESENCE>>",
     "CloudWatchMetrics": [
       {
-        "Namespace": "MyNameSpace",
+        "Namespace": "aws-embedded-metrics",
         "Dimensions": [
           [
             "ServiceName",
@@ -18,14 +20,12 @@
           }
         ]
       }
-    ]
+    ],
+    "Timestamp": 0
   },
   "executionEnvironment": "",
   "functionName": "",
   "functionVersion": "",
   "logStreamId": "",
-  "memorySize": "",
-  "ServiceName": "",
-  "ServiceType": "AWS::Lambda::Function",
-  "Foo": 27
+  "memorySize": ""
 }
