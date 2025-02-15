@@ -236,7 +236,7 @@ func (l *Logger) Flush() error {
 	}
 
 	if err := l.encoder.Encode(l.values); err != nil {
-		return fmt.Errorf("Could not encode metrics to JSON: %w", err)
+		return fmt.Errorf("could not encode metrics to JSON: %w", err)
 	}
 	return nil
 }
