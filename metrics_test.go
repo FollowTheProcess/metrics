@@ -7,8 +7,8 @@ import (
 
 	"github.com/FollowTheProcess/metrics"
 	"github.com/FollowTheProcess/metrics/unit"
-	"github.com/FollowTheProcess/snapshot"
-	"github.com/FollowTheProcess/test"
+	"go.followtheprocess.codes/snapshot"
+	"go.followtheprocess.codes/test"
 )
 
 var (
