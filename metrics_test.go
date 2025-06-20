@@ -5,8 +5,8 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/FollowTheProcess/metrics"
-	"github.com/FollowTheProcess/metrics/unit"
+	"go.followtheprocess.codes/metrics"
+	"go.followtheprocess.codes/metrics/unit"
 	"go.followtheprocess.codes/snapshot"
 	"go.followtheprocess.codes/test"
 )

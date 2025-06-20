@@ -4,7 +4,7 @@
 // It is fully compliant with the [EMF Specification]
 //
 // [EMF Specification]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format_Specification.html
-package metrics
+package metrics // import "go.followtheprocess.codes/metrics"
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/FollowTheProcess/metrics/unit"
+	"go.followtheprocess.codes/metrics/unit"
 )
 
 // StorageResolution represents the metrics resolution.
