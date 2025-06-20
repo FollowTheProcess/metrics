@@ -1,4 +1,4 @@
-module github.com/FollowTheProcess/metrics
+module go.followtheprocess.codes/metrics
 
 go 1.24
 

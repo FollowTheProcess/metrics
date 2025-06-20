@@ -1,5 +1,5 @@
 // Package unit provides valid AWS CloudWatch EMF metric units.
-package unit
+package unit // import "go.followtheprocess.codes/metrics/unit"
 
 // Unit represents an EMF metric unit.
 type Unit string

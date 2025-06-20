@@ -48,7 +48,7 @@ An EMF JSON blob looks like this:
 ## Installation
 
 ```shell
-go get github.com/FollowTheProcess/metrics@latest
+go get go.followtheprocess.codes/metrics@latest
 ```
 
 ## Quickstart
@@ -58,8 +58,8 @@ to `Flush`:
 
 ```go
 import (
-    "github.com/FollowTheProcess/metrics"
-    "github.com/FollowTheProcess/metrics/unit"
+    "go.followtheprocess.codes/metrics"
+    "go.followtheprocess.codes/metrics/unit"
 )
 // Assuming you're inside a lambda handler
 
