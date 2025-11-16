@@ -1,0 +1,35 @@
+source: metrics_test.go
+expression: buf.String()
+---
+|
+  {
+    "Bar": 267,
+    "ServiceName": "FuncyFunc",
+    "ServiceType": "AWS::Lambda::Function",
+    "_aws": {
+      "CloudWatchMetrics": [
+        {
+          "Namespace": "aws-embedded-metrics",
+          "Dimensions": [
+            [
+              "ServiceName",
+              "ServiceType"
+            ]
+          ],
+          "Metrics": [
+            {
+              "Name": "Bar",
+              "Unit": "Bytes/Second",
+              "StorageResolution": 1
+            }
+          ]
+        }
+      ],
+      "Timestamp": 0
+    },
+    "executionEnvironment": "Go1.21",
+    "functionName": "FuncyFunc",
+    "functionVersion": "12",
+    "logStreamId": "LoggyLog",
+    "memorySize": "256"
+  }

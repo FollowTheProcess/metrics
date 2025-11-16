@@ -1,0 +1,36 @@
+source: metrics_test.go
+expression: buf.String()
+---
+|
+  {
+    "ServiceName": "",
+    "ServiceType": "AWS::Lambda::Function",
+    "_aws": {
+      "CloudWatchMetrics": [
+        {
+          "Namespace": "aws-embedded-metrics",
+          "Dimensions": [
+            [
+              "ServiceName",
+              "ServiceType"
+            ]
+          ],
+          "Metrics": [
+            {
+              "Name": "something",
+              "Unit": "Count",
+              "StorageResolution": 60
+            }
+          ]
+        }
+      ],
+      "Timestamp": 0
+    },
+    "executionEnvironment": "",
+    "functionName": "",
+    "functionVersion": "",
+    "logStreamId": "",
+    "memorySize": "",
+    "something": 5,
+    "traceId": "something_looks_like_id_with_Sampled=1"
+  }
