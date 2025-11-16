@@ -10,6 +10,8 @@ go.followtheprocess.codes/snapshot v0.6.1 h1:cZkQtEjL21BSrHn98Lm0S4yTzcOje/K60Io
 go.followtheprocess.codes/snapshot v0.6.1/go.mod h1:CM2E92Ah/j0XL4Z2UyOl7GlSuD0ZLLl8rJCpFylKcIg=
 go.followtheprocess.codes/snapshot v0.7.0 h1:tzlaJN2JRdfZail13NxinSr4hx3xjBRr1zKSnHiwB2w=
 go.followtheprocess.codes/snapshot v0.7.0/go.mod h1:3CCSAEz+nbity6iZ9eWid9zLtIqFG7PE3DLhWGHLdIU=
+go.followtheprocess.codes/snapshot v0.8.0 h1:8FizwgnHIlZZa4wSgHeDYFO7OWY3yAzhkA1hIYCzoDo=
+go.followtheprocess.codes/snapshot v0.8.0/go.mod h1:3CCSAEz+nbity6iZ9eWid9zLtIqFG7PE3DLhWGHLdIU=
 go.followtheprocess.codes/test v0.22.0 h1:erXLdEY/Kj0+gt5rNVtHzbJ+7g9l0JBNuzc7WtcFz00=
 go.followtheprocess.codes/test v0.22.0/go.mod h1:5xDKZUMZ125YgTPBxaAo2nioaSSk7dkfcTCyzsigWzE=
 go.followtheprocess.codes/test v0.23.0 h1:XpKkEAzzm2/FmOAfR6GHRvgdY3XhragOWYCCvr9F6wg=

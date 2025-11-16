@@ -127,7 +127,7 @@ func BenchmarkFlush(b *testing.B) {
 	m := metrics.New(metrics.Stdout(buf))
 	m.Add("Speed", 100, unit.MegabytesPerSecond, metrics.StandardResolution)
 
-	for range b.N {
+	for b.Loop() {
 		if err := m.Flush(); err != nil {
 			b.Fatalf("Flush() returned an error: %v", err)
 		}

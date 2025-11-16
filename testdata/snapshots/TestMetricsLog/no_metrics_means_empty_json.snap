@@ -1,0 +1,4 @@
+source: metrics_test.go
+expression: buf.String()
+---
+""
