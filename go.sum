@@ -22,6 +22,8 @@ go.followtheprocess.codes/test v0.23.1 h1:VoucCC8qKb6tKnBOCRZ7Ln2Ex1oV+HMXHdZyJ6
 go.followtheprocess.codes/test v0.23.1/go.mod h1:sL19ttHv+BSJSMtdPXTP05aWwl58ciap0SoLp1hucKk=
 go.followtheprocess.codes/test v1.0.0 h1:5m2MPOQpohDC9pf5hgqpH+4ldJP5g+YFVdoGQY41aeU=
 go.followtheprocess.codes/test v1.0.0/go.mod h1:e627pR8IhsTV/RfuP/WKYjyL0BmuIbmaw2iKlQBCWrY=
+go.followtheprocess.codes/test v1.1.0 h1:1v2JyMd3STr7dIXzcHEhct2qvS8/mTtGYbSyhpReciI=
+go.followtheprocess.codes/test v1.1.0/go.mod h1:BHZi5SZahJw01xcuc7EgrlyzX7zJLXAWy11rOR9geVw=
 go.yaml.in/yaml/v4 v4.0.0-rc.3 h1:3h1fjsh1CTAPjW7q/EMe+C8shx5d8ctzZTrLcs/j8Go=
 go.yaml.in/yaml/v4 v4.0.0-rc.3/go.mod h1:aZqd9kCMsGL7AuUv/m/PvWLdg5sjJsZ4oHDEnfPPfY0=
 golang.org/x/sys v0.33.0 h1:q3i8TbbEz+JRD9ywIRlyRAQbM0qF7hu24q3teo2hbuw=
