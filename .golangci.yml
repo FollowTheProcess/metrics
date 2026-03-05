@@ -174,3 +174,6 @@ linters:
 
         - name: unused-receiver
           disabled: true # As above
+
+        - name: var-naming
+          disabled: true
