@@ -40,6 +40,8 @@ go.followtheprocess.codes/test v1.2.0 h1:MWuEVS7ijQLp9qCGYNmzTazWIfEL/TbQid4PnaV
 go.followtheprocess.codes/test v1.2.0/go.mod h1:ZbzmY8F5w44x9kk1vdvJlBu+9dhunHtXf/A1ydXaYP4=
 go.followtheprocess.codes/test v1.2.2 h1:iaUSB6BhzH/UAsVMhMjUW1uSVn8GMa2GgqPMqwxGwuo=
 go.followtheprocess.codes/test v1.2.2/go.mod h1:/Lq3YrwTqU/tb1wbO+Kt7Gs1I3qzFu/o/CUykOavoVA=
+go.followtheprocess.codes/test v1.3.0 h1:LoLaG1dup81omaa5WoR7Wouwn/DjBXeHTwkIvNqWFLY=
+go.followtheprocess.codes/test v1.3.0/go.mod h1:/Lq3YrwTqU/tb1wbO+Kt7Gs1I3qzFu/o/CUykOavoVA=
 go.yaml.in/yaml/v4 v4.0.0-rc.3 h1:3h1fjsh1CTAPjW7q/EMe+C8shx5d8ctzZTrLcs/j8Go=
 go.yaml.in/yaml/v4 v4.0.0-rc.3/go.mod h1:aZqd9kCMsGL7AuUv/m/PvWLdg5sjJsZ4oHDEnfPPfY0=
 go.yaml.in/yaml/v4 v4.0.0-rc.4 h1:UP4+v6fFrBIb1l934bDl//mmnoIZEDK0idg1+AIvX5U=
